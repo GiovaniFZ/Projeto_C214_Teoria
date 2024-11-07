@@ -1,14 +1,30 @@
-name: WORKFLOW
+name: Manager Workflow
 on:
   push:
-    branches:
-      - main
+    branches: [ "main" ]
 
 jobs:
   test:
-    name: Test with python
+    name: Test with Python
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - name: Run tests using pyunit
         run: python3 tests.py
+    
+  build:
+    name: Build package
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build python package with setup.py
+        run: |
+          python3 -m pip install --upgrade build
+          python3 -m build
+          
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: Package
+          path: dist/*.tar.gz

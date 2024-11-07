@@ -1,5 +1,5 @@
 import unittest
-from manager import Manage
+from manager.manager import Manage
 
 class TestClass(unittest.TestCase):
     

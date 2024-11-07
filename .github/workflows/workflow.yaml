@@ -1,0 +1,14 @@
+name: WORKFLOW
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  test:
+    name: Test with python
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run tests using pyunit
+        run: python3 tests.py

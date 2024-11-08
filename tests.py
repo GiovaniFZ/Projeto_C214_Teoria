@@ -1,5 +1,6 @@
 import unittest
 from manager.manager import Manage
+from HtmlTestRunner import HTMLTestRunner
 
 class TestClass(unittest.TestCase):
     
@@ -21,4 +22,6 @@ class TestClass(unittest.TestCase):
         self.assertEqual(manager.checkName(), 'Giovani')
 
 if __name__ == '__main__':
-    unittest.main()
+    with open("test_report.html", "w") as f:
+        runner = HTMLTestRunner(stream=f, report_title="Test Report")
+        unittest.main(testRunner=runner)
